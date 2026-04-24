@@ -21,8 +21,8 @@ This module is an **Enterprise Enhancement**. It requires the **Odoo Enterprise 
 
 Designed for organizations that demand Enterprise-level financial accuracy and modern reporting interfaces.
     """,
-    'author': 'Custom',
-    'website': 'https://yourwebsite.com',
+    'author': 'Rahmathullah/Digitz Technologies',
+    'website': 'https://digitztech.com/',
     'license': 'LGPL-3',
     'depends': [
         'account',
@@ -48,6 +48,6 @@ Designed for organizations that demand Enterprise-level financial accuracy and m
     'installable': True,
     'application': True,
     'auto_install': False,
-    'price': 69.00,
+    'price': 9.00,
     'currency': 'EUR',
 }
