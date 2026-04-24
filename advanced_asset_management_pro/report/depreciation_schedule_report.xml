@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Custom A4 Landscape paper format for this report -->
+    <record id="paperformat_asset_depreciation_schedule" model="report.paperformat">
+        <field name="name">A4 Landscape (Asset Depreciation)</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">15</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">10</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!--               QWeb Report Template                           -->
+    <!-- ============================================================ -->
+    <template id="report_depreciation_schedule_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="wizard">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <style>
+                            .dep-table { width: 100%; border-collapse: collapse; font-size: 8px; }
+                            .dep-table th, .dep-table td {
+                                border: 1px solid #ccc;
+                                padding: 3px 4px;
+                                text-align: right;
+                                white-space: nowrap;
+                            }
+                            .dep-table td.tl { text-align: left; }
+                            .dep-table td.tc { text-align: center; }
+                            .th-section {
+                                background: #dce9f7;
+                                text-align: center !important;
+                                font-weight: bold;
+                                font-size: 8.5px;
+                            }
+                            .th-col {
+                                background: #eef4fb;
+                                text-align: center !important;
+                                font-size: 7.5px;
+                                color: #333;
+                            }
+                            .group-row { background: #eef4fb; font-weight: bold; }
+                            .group-row td.tl { color: #1a5f8a; }
+                            .child-row td { color: #444; }
+                            .child-row td.tl { padding-left: 18px; }
+                            .total-row { background: #f0f0f0; font-weight: bold; border-top: 2px solid #555; }
+                            .zero { color: #aaa; }
+                            h3 { margin: 0 0 3px 0; font-size: 13px; }
+                            .sub { font-size: 9px; color: #555; margin-bottom: 6px; }
+                        </style>
+
+                        <h3>Depreciation Schedule</h3>
+                        <div class="sub">
+                            From <strong><t t-esc="data['date_from']"/></strong>
+                            to <strong><t t-esc="data['date_to']"/></strong>
+                            &#160;&#160;|&#160;&#160;
+                            <t t-esc="data['company_name']"/>
+                        </div>
+
+                        <table class="dep-table">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="text-align:left; min-width:130px;">Asset</th>
+                                    <!-- Characteristics -->
+                                    <th colspan="4" class="th-section">Characteristics</th>
+                                    <!-- Assets -->
+                                    <th colspan="4" class="th-section">Assets</th>
+                                    <!-- Depreciation -->
+                                    <th colspan="4" class="th-section">Depreciation</th>
+                                    <!-- Book Value -->
+                                    <th rowspan="2" class="th-section">Book&#160;Value</th>
+                                </tr>
+                                <tr>
+                                    <th class="th-col">Acq. Date</th>
+                                    <th class="th-col">First Depr.</th>
+                                    <th class="th-col">Method</th>
+                                    <th class="th-col">Duration&#160;/&#160;Rate</th>
+
+                                    <th class="th-col"><t t-esc="data['date_from']"/></th>
+                                    <th class="th-col">+</th>
+                                    <th class="th-col">-</th>
+                                    <th class="th-col"><t t-esc="data['date_to']"/></th>
+
+                                    <th class="th-col"><t t-esc="data['date_from']"/></th>
+                                    <th class="th-col">+</th>
+                                    <th class="th-col">-</th>
+                                    <th class="th-col"><t t-esc="data['date_to']"/></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="data['lines']" t-as="group">
+                                    <!-- Account Group Header -->
+                                    <tr class="group-row">
+                                        <td class="tl" colspan="5">&#9658; <t t-esc="group['name']"/></td>
+                                        <td><t t-if="group['asset_opening']"><t t-esc="'%.2f' % group['asset_opening']"/></t><t t-else=""><span class="zero">0.00</span></t></td>
+                                        <td><t t-if="group['asset_add']"><t t-esc="'%.2f' % group['asset_add']"/></t><t t-else=""><span class="zero">0.00</span></t></td>
+                                        <td><t t-if="group['asset_minus']"><t t-esc="'%.2f' % group['asset_minus']"/></t><t t-else=""><span class="zero">0.00</span></t></td>
+                                        <td><t t-esc="'%.2f' % group['asset_closing']"/></td>
+                                        <td><t t-if="group['dep_opening']"><t t-esc="'%.2f' % group['dep_opening']"/></t><t t-else=""><span class="zero">0.00</span></t></td>
+                                        <td><t t-if="group['dep_add']"><t t-esc="'%.2f' % group['dep_add']"/></t><t t-else=""><span class="zero">0.00</span></t></td>
+                                        <td><t t-if="group['dep_minus']"><t t-esc="'%.2f' % group['dep_minus']"/></t><t t-else=""><span class="zero">0.00</span></t></td>
+                                        <td><t t-esc="'%.2f' % group['dep_closing']"/></td>
+                                        <td><t t-esc="'%.2f' % group['book_value']"/></td>
+                                    </tr>
+
+                                    <!-- Child Asset Lines -->
+                                    <t t-foreach="group['children']" t-as="child">
+                                        <tr class="child-row">
+                                            <td class="tl">&#160;&#160;&#160;<t t-esc="child['name']"/></td>
+                                            <td class="tc"><t t-esc="child['acquisition_date']"/></td>
+                                            <td class="tc"><t t-esc="child['first_depreciation']"/></td>
+                                            <td class="tc"><t t-esc="child['method']"/></td>
+                                            <td class="tc"><t t-esc="child['duration_rate']"/></td>
+                                            <td><t t-if="child['asset_opening']"><t t-esc="'%.2f' % child['asset_opening']"/></t><t t-else=""><span class="zero">0.00</span></t></td>
+                                            <td><t t-if="child['asset_add']"><t t-esc="'%.2f' % child['asset_add']"/></t><t t-else=""><span class="zero">0.00</span></t></td>
+                                            <td><t t-if="child['asset_minus']"><t t-esc="'%.2f' % child['asset_minus']"/></t><t t-else=""><span class="zero">0.00</span></t></td>
+                                            <td><t t-esc="'%.2f' % child['asset_closing']"/></td>
+                                            <td><t t-if="child['dep_opening']"><t t-esc="'%.2f' % child['dep_opening']"/></t><t t-else=""><span class="zero">0.00</span></t></td>
+                                            <td><t t-if="child['dep_add']"><t t-esc="'%.2f' % child['dep_add']"/></t><t t-else=""><span class="zero">0.00</span></t></td>
+                                            <td><t t-if="child['dep_minus']"><t t-esc="'%.2f' % child['dep_minus']"/></t><t t-else=""><span class="zero">0.00</span></t></td>
+                                            <td><t t-esc="'%.2f' % child['dep_closing']"/></td>
+                                            <td><t t-esc="'%.2f' % child['book_value']"/></td>
+                                        </tr>
+                                    </t>
+                                </t>
+
+                                <!-- Grand Total -->
+                                <tr class="total-row">
+                                    <td class="tl" colspan="5">Total</td>
+                                    <td><t t-esc="'%.2f' % data['totals']['asset_opening']"/></td>
+                                    <td><t t-esc="'%.2f' % data['totals']['asset_add']"/></td>
+                                    <td><t t-esc="'%.2f' % data['totals']['asset_minus']"/></td>
+                                    <td><t t-esc="'%.2f' % data['totals']['asset_closing']"/></td>
+                                    <td><t t-esc="'%.2f' % data['totals']['dep_opening']"/></td>
+                                    <td><t t-esc="'%.2f' % data['totals']['dep_add']"/></td>
+                                    <td><t t-esc="'%.2f' % data['totals']['dep_minus']"/></td>
+                                    <td><t t-esc="'%.2f' % data['totals']['dep_closing']"/></td>
+                                    <td><t t-esc="'%.2f' % data['totals']['book_value']"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- ============================================================ -->
+    <!--               Report Action Registration                     -->
+    <!-- ============================================================ -->
+    <record id="action_report_depreciation_schedule" model="ir.actions.report">
+        <field name="name">Depreciation Schedule</field>
+        <field name="model">asset.depreciation.schedule.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">advanced_asset_management_pro.report_depreciation_schedule_document</field>
+        <field name="report_file">advanced_asset_management_pro.report_depreciation_schedule_document</field>
+        <field name="print_report_name">'Depreciation Schedule'</field>
+        <field name="paperformat_id" ref="paperformat_asset_depreciation_schedule"/>
+    </record>
+</odoo>

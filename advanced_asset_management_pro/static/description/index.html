@@ -1,0 +1,178 @@
+<style>
+    :root {
+        --primary: #6c5ce7;
+        --secondary: #a29bfe;
+        --enterprise: #ff7675;
+        --dark: #2d3436;
+        --text: #636e72;
+        --glass: rgba(255, 255, 255, 0.9);
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-up { animation: fadeInUp 0.8s ease-out forwards; }
+
+    .hero-section {
+        background: linear-gradient(135deg, #090909 0%, #1c1c1c 100%);
+        color: white;
+        padding: 100px 20px;
+        text-align: center;
+        border-radius: 0 0 80px 80px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        content: 'ENTERPRISE';
+        position: absolute;
+        top: 20px;
+        right: -50px;
+        background: var(--enterprise);
+        padding: 10px 100px;
+        transform: rotate(45deg);
+        font-weight: 900;
+        letter-spacing: 2px;
+        font-size: 14px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .feature-card {
+        background: var(--glass);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 24px;
+        padding: 40px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        height: 100%;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+        border-color: var(--primary);
+    }
+
+    .req-badge {
+        background: rgba(255, 118, 117, 0.1);
+        color: var(--enterprise);
+        border: 1px solid var(--enterprise);
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-size: 14px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .section-title {
+        color: var(--dark);
+        font-weight: 900;
+        font-size: 36px;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+    .img-premium {
+        border-radius: 30px;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        border: 1px solid rgba(255,255,255,0.1);
+        max-width: 100%;
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="oe_container">
+        <div class="req-badge animate-up">
+            <i class="fa fa-info-circle"></i> Odoo Enterprise Accounting Required
+        </div>
+        <h1 class="animate-up" style="font-weight: 900; font-size: 54px; margin-bottom: 25px; background: linear-gradient(to right, #fff, #aaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            Asset Management Pro
+        </h1>
+        <p class="animate-up" style="font-size: 24px; opacity: 0.8; max-width: 850px; margin: 0 auto 50px; line-height: 1.5;">
+            The definitive Enterprise-grade suite for automated depreciation and asset lifecycle governance.
+        </p>
+        <div class="animate-up" style="margin-top: 60px;">
+            <img src="banner.png" class="img-premium" alt="Enterprise Asset Management">
+        </div>
+    </div>
+</section>
+
+<!-- Core Features -->
+<section class="oe_container" style="padding: 120px 20px;">
+    <h2 class="section-title">Built for Enterprise Scale</h2>
+    <div class="oe_row oe_spaced">
+        <div class="oe_span4 animate-up">
+            <div class="feature-card">
+                <div style="font-size: 40px; color: var(--primary); margin-bottom: 25px;"><i class="fa fa-university"></i></div>
+                <h4 style="font-weight: 800; color: var(--dark);">Financial Precision</h4>
+                <p style="color: var(--text); line-height: 1.7;">Advanced calculation engines for Linear, Declining Balance, and hybrid methods designed for audit compliance.</p>
+            </div>
+        </div>
+        <div class="oe_span4 animate-up" style="animation-delay: 0.1s;">
+            <div class="feature-card">
+                <div style="font-size: 40px; color: var(--primary); margin-bottom: 25px;"><i class="fa fa-desktop"></i></div>
+                <h4 style="font-weight: 800; color: var(--dark);">Native Reporting</h4>
+                <p style="color: var(--text); line-height: 1.7;">Seamlessly leverages the Odoo Enterprise Dynamic Reporting engine for a high-end interactive experience.</p>
+            </div>
+        </div>
+        <div class="oe_span4 animate-up" style="animation-delay: 0.2s;">
+            <div class="feature-card">
+                <div style="font-size: 40px; color: var(--primary); margin-bottom: 25px;"><i class="fa fa-history"></i></div>
+                <h4 style="font-weight: 800; color: var(--dark);">Full Lifecycle</h4>
+                <p style="color: var(--text); line-height: 1.7;">From initial procurement to disposals, sales, and complex modifications—every step is governed.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Reporting Showcase -->
+<section style="background: #fdfdfd; padding: 120px 0;">
+    <div class="oe_container">
+        <div class="oe_row oe_spaced" style="display: flex; align-items: center; flex-wrap: wrap;">
+            <div class="oe_span6 animate-up">
+                <div class="req-badge" style="background: rgba(108, 92, 231, 0.05); color: var(--primary); border-color: var(--primary);">
+                    Advanced Integration
+                </div>
+                <h2 style="font-weight: 900; color: var(--dark); font-size: 42px; margin-bottom: 30px;">Interactive Financial Visibility</h2>
+                <p style="font-size: 19px; color: var(--text); line-height: 1.8; margin-bottom: 40px;">
+                    Experience Odoo 18 style transparency in your current Odoo 16 environment. Drill down into asset origins, analyze book value changes, and export data with a single click.
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div style="font-weight: 700; color: var(--dark);"><i class="fa fa-check" style="color: #00b894;"></i> Audit Ready</div>
+                    <div style="font-weight: 700; color: var(--dark);"><i class="fa fa-check" style="color: #00b894;"></i> Pivot Integration</div>
+                    <div style="font-weight: 700; color: var(--dark);"><i class="fa fa-check" style="color: #00b894;"></i> Excel/PDF Export</div>
+                    <div style="font-weight: 700; color: var(--dark);"><i class="fa fa-check" style="color: #00b894;"></i> Multi-Period Filters</div>
+                </div>
+            </div>
+            <div class="oe_span6 animate-up" style="text-align: right;">
+                <img src="reporting.png" class="img-premium" alt="Reporting Dashboard">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section style="background: var(--dark); color: white; padding: 100px 20px; text-align: center;">
+    <div class="oe_container">
+        <h2 style="font-weight: 900; font-size: 42px; margin-bottom: 25px;">Upgrade Your Enterprise Ledger</h2>
+        <p style="font-size: 20px; opacity: 0.8; max-width: 750px; margin: 0 auto 50px;">
+            Professional assets require professional management. Bring the future of Odoo reporting to your Enterprise instance today.
+        </p>
+        <div style="background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); display: inline-block;">
+            <p style="margin: 0; opacity: 0.7; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">Technical Specification</p>
+            <h3 style="margin-top: 10px; font-weight: 700;">Compatible with Odoo 16 Enterprise</h3>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<section class="oe_container" style="padding: 60px 20px; text-align: center; border-top: 1px solid #eee;">
+    <p style="color: #b2bec3; font-size: 14px;">Version 16.0.1.0.0 | Designed for Odoo Enterprise Environments</p>
+</section>

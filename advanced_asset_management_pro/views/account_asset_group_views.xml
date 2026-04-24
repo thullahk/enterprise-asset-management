@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Asset Group Form View -->
+    <record id="view_account_asset_group_form" model="ir.ui.view">
+        <field name="name">account.asset.group.form</field>
+        <field name="model">account.asset.group</field>
+        <field name="arch" type="xml">
+            <form string="Asset Group">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                                name="action_open_linked_assets"
+                                type="object" icon="fa-list"
+                                attrs="{'invisible': [('count_linked_assets', '=', 0)]}">
+                            <field name="count_linked_assets"
+                                   string="Assets" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="company_id"
+                               groups="base.group_multi_company"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Asset Group List View -->
+    <record id="view_account_asset_group_tree" model="ir.ui.view">
+        <field name="name">account.asset.group.tree</field>
+        <field name="model">account.asset.group</field>
+        <field name="arch" type="xml">
+            <tree string="Asset Groups">
+                <field name="name"/>
+                <field name="count_linked_assets" string="# Assets"/>
+                <field name="company_id"
+                       groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Asset Group Action -->
+    <record id="action_account_asset_group" model="ir.actions.act_window">
+        <field name="name">Asset Groups</field>
+        <field name="res_model">account.asset.group</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create asset groups to classify your assets
+            </p>
+        </field>
+    </record>
+
+    <!-- Asset Group Menu Item under Configuration → Assets -->
+    <menuitem id="menu_action_account_asset_group"
+              name="Asset Groups"
+              parent="advanced_asset_management_pro.menu_finance_config_assets"
+              action="action_account_asset_group"
+              sequence="20"/>
+
+</odoo>

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_asset,account.asset,model_account_asset,account.group_account_readonly,1,0,0,0
+access_account_asset_manager,account.asset.manager,model_account_asset,account.group_account_manager,1,1,1,1
+access_account_asset_invoicing_payment,account.asset.invoicing,model_account_asset,account.group_account_invoice,1,0,1,0
+access_asset_modify,access.asset.modify,model_asset_modify,account.group_account_user,1,1,1,0
+access_account_asset_group,account.asset.group,model_account_asset_group,account.group_account_readonly,1,0,0,0
+access_account_asset_group_manager,account.asset.group.manager,model_account_asset_group,account.group_account_manager,1,1,1,1
+access_account_asset_report,account.asset.report,model_account_asset_report,account.group_account_readonly,1,0,0,0
+access_account_asset_report_manager,account.asset.report.manager,model_account_asset_report,account.group_account_manager,1,0,0,0
+access_dep_schedule_wizard,asset.depreciation.schedule.wizard,model_asset_depreciation_schedule_wizard,account.group_account_user,1,1,1,0

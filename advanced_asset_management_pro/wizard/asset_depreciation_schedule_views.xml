@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ======================================================== -->
+    <!--  Depreciation Schedule - Standard Accounting Report View  -->
+    <!--  Opens directly as a full-screen accounting report,       -->
+    <!--  just like Balance Sheet, Profit & Loss, etc.             -->
+    <!-- ======================================================== -->
+
+    <!-- Client action: opens the account_reports engine view -->
+    <record id="action_depreciation_schedule_report" model="ir.actions.client">
+        <field name="name">Depreciation Schedule</field>
+        <field name="tag">account_report</field>
+        <field name="context" eval="{'report_id': ref('advanced_asset_management_pro.depreciation_schedule_report')}"/>
+    </record>
+
+    <!-- Menu Item under Reporting > Management -->
+    <menuitem id="menu_finance_reports_assets_new"
+              name="Depreciation Schedule"
+              parent="account.account_reports_management_menu"
+              action="action_depreciation_schedule_report"
+              sequence="45"/>
+
+    <!-- ======================================================= -->
+    <!--  Wizard form kept for standalone PDF printing if needed  -->
+    <!-- ======================================================= -->
+    <record id="view_depreciation_schedule_wizard_form" model="ir.ui.view">
+        <field name="name">asset.depreciation.schedule.wizard.form</field>
+        <field name="model">asset.depreciation.schedule.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Depreciation Schedule">
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <group>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_print_pdf"
+                            string="Print PDF"
+                            type="object"
+                            class="btn-primary"
+                            icon="fa-download"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

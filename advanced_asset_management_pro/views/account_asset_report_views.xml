@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- =========================== -->
+    <!--     ASSET REPORT GRAPH      -->
+    <!-- =========================== -->
+    <record id="view_account_asset_report_graph" model="ir.ui.view">
+        <field name="name">account.asset.report.graph</field>
+        <field name="model">account.asset.report</field>
+        <field name="arch" type="xml">
+            <graph string="Asset Analysis" sample="1">
+                <field name="acquisition_date" type="row"/>
+                <field name="asset_group_id" type="row"/>
+                <field name="depreciated_value" type="measure"/>
+                <field name="book_value" type="measure"/>
+                <field name="original_value" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- =========================== -->
+    <!--     ASSET REPORT PIVOT      -->
+    <!-- =========================== -->
+    <record id="view_account_asset_report_pivot" model="ir.ui.view">
+        <field name="name">account.asset.report.pivot</field>
+        <field name="model">account.asset.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Asset Analysis" sample="1">
+                <field name="acquisition_date" type="row"/>
+                <field name="asset_group_id" type="col"/>
+                <field name="original_value" type="measure"/>
+                <field name="depreciated_value" type="measure"/>
+                <field name="book_value" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- =========================== -->
+    <!--     ASSET REPORT SEARCH     -->
+    <!-- =========================== -->
+    <record id="view_account_asset_report_search" model="ir.ui.view">
+        <field name="name">account.asset.report.search</field>
+        <field name="model">account.asset.report</field>
+        <field name="arch" type="xml">
+            <search string="Asset Analysis">
+                <field name="name" string="Asset"/>
+                <filter string="Running" name="running" domain="[('state', '=', 'open')]"/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Closed" name="closed" domain="[('state', '=', 'close')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Asset" name="groupby_asset" context="{'group_by':'asset_id'}"/>
+                    <filter string="Group" name="groupby_group" context="{'group_by':'asset_group_id'}"/>
+                    <filter string="Status" name="groupby_state" context="{'group_by':'state'}"/>
+                    <filter string="Acquisition Date" name="groupby_date" context="{'group_by':'acquisition_date'}"/>
+                    <filter string="Company" name="groupby_company" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- =========================== -->
+    <!--     ASSET ANALYSIS ACTION   -->
+    <!-- =========================== -->
+    <record id="action_account_asset_report" model="ir.actions.act_window">
+        <field name="name">Asset Analysis</field>
+        <field name="res_model">account.asset.report</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="search_view_id" ref="view_account_asset_report_search"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No asset analysis available yet.
+            </p>
+        </field>
+    </record>
+
+    <!-- =========================== -->
+    <!--         MENU ITEMS          -->
+    <!-- =========================== -->
+    <menuitem id="menu_finance_reports_assets"
+              name="Asset Analysis"
+              parent="account.account_reports_management_menu"
+              action="action_account_asset_report"
+              sequence="46"/>
+
+</odoo>

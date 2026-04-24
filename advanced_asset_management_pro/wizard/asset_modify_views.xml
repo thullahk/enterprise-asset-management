@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Wizard form view -->
+    <record id="view_asset_modify_form" model="ir.ui.view">
+        <field name="name">asset.modify.form</field>
+        <field name="model">asset.modify</field>
+        <field name="arch" type="xml">
+            <form string="Modify Asset">
+                <field name="asset_id" invisible="1"/>
+                <field name="company_id" invisible="1"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="is_resume" invisible="1"/>
+
+                <group>
+                    <group>
+                        <field name="modify_action" widget="radio" options="{'horizontal': True}" string="Action" attrs="{'invisible': [('is_resume', '=', True)]}"/>
+                        <field name="date" string="Date"/>
+
+                        <label for="method_number" string="Duration" attrs="{'invisible': [('modify_action', '!=', 'modify'), ('is_resume', '=', False)]}"/>
+                        <div class="o_row" attrs="{'invisible': [('modify_action', '!=', 'modify'), ('is_resume', '=', False)]}">
+                            <field name="method_number"/>
+                            <field name="method_period" nolabel="1"/>
+                        </div>
+
+                        <field name="value_residual" string="Depreciable Amount" attrs="{'invisible': [('modify_action', '!=', 'modify'), ('is_resume', '=', False)]}"/>
+                        <field name="salvage_value" string="Not Depreciable Amount" attrs="{'invisible': [('modify_action', '!=', 'modify'), ('is_resume', '=', False)]}"/>
+
+                        <!-- Sell only fields -->
+                        <field name="invoice_ids" widget="many2many_tags"
+                               domain="[('move_type', '=', 'out_invoice'), ('state', '=', 'posted')]"
+                               string="Customer Invoices"
+                               attrs="{'invisible': [('modify_action', '!=', 'sell')], 'required': [('modify_action', '=', 'sell')]}"/>
+                        <field name="invoice_line_ids" widget="many2many_tags"
+                               domain="[('move_id', 'in', invoice_ids)]"
+                               string="Invoice Lines"
+                               attrs="{'invisible': [('modify_action', '!=', 'sell')], 'required': [('modify_action', '=', 'sell')]}"/>
+                        
+                        <!-- Account Routing: Gain (Sell) vs Loss (Dispose) -->
+                        <field name="gain_account_id"
+                               string="Gain Account"
+                               domain="[('deprecated', '=', False), ('company_id', '=', company_id)]"
+                               attrs="{'invisible': [('modify_action', '!=', 'sell')], 'required': [('modify_action', '=', 'sell')]}"/>
+                        <field name="loss_account_id"
+                               string="Loss Account"
+                               domain="[('deprecated', '=', False), ('company_id', '=', company_id)]"
+                               attrs="{'invisible': ['|', ('is_resume', '=', True), ('modify_action', '!=', 'dispose')], 'required': [('modify_action', '=', 'dispose')]}"/>
+
+                        <field name="account_asset_id" string="Gross Increase Account"
+                               attrs="{'invisible': [('modify_action', '!=', 'modify')]}"/>
+                        <field name="account_asset_counterpart_id" string="Asset Counterpart Account"
+                               attrs="{'invisible': [('modify_action', '!=', 'modify')]}"/>
+                        <field name="account_depreciation_id" string="Depreciation Account"
+                               attrs="{'invisible': [('modify_action', '!=', 'modify')]}"/>
+                        <field name="account_depreciation_expense_id" string="Expense Account"
+                               attrs="{'invisible': [('modify_action', '!=', 'modify')]}"/>
+                        
+                        <field name="name" string="Note" placeholder="Add an internal note" required="0"/>
+                    </group>
+                    <group attrs="{'invisible': [('modify_action', '!=', 'modify'), ('is_resume', '=', False)]}">
+                        <div class="text-muted">
+                            <p>A depreciation entry will be posted on and including the date <span><field name="date" readonly="1" class="oe_inline"/></span>.</p>
+                            <p>Future entries will be recomputed to depreciate the asset following the changes.</p>
+                        </div>
+                    </group>
+                </group>
+
+                <footer>
+                    <button string="Modify" name="modify" type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
