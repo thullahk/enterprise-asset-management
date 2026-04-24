@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="depreciation_schedule_report" model="account.report">
+        <field name="name">Depreciation Schedule</field>
+        <field name="filter_show_draft" eval="False"/>
+        <field name="filter_unfold_all" eval="True"/>
+        <field name="filter_period_comparison" eval="False"/>
+        <field name="filter_multi_company">selector</field>
+        <field name="default_opening_date_filter">this_year</field>
+        <field name="search_bar" eval="True"/>
+        <field name="load_more_limit" eval="80"/>
+        <field name="custom_handler_model_id" ref="model_account_asset_depreciation_schedule_handler"/>
+        <field name="column_ids">
+            <!-- 1. Characteristics -->
+            <record id="dep_schedule_acquisition_date" model="account.report.column">
+                <field name="name">Acquisition Date</field>
+                <field name="expression_label">acquisition_date</field>
+                <field name="figure_type">none</field>
+                <field name="sequence">1</field>
+            </record>
+            <record id="dep_schedule_first_depreciation" model="account.report.column">
+                <field name="name">First Depreciation</field>
+                <field name="expression_label">first_depreciation</field>
+                <field name="figure_type">none</field>
+                <field name="sequence">2</field>
+            </record>
+            <record id="dep_schedule_method" model="account.report.column">
+                <field name="name">Method</field>
+                <field name="expression_label">method</field>
+                <field name="figure_type">none</field>
+                <field name="sequence">3</field>
+            </record>
+            <record id="dep_schedule_duration_rate" model="account.report.column">
+                <field name="name">Duration / Rate</field>
+                <field name="expression_label">duration_rate</field>
+                <field name="figure_type">none</field>
+                <field name="sequence">4</field>
+            </record>
+
+            <!-- 2. Assets -->
+            <record id="dep_schedule_asset_opening" model="account.report.column">
+                <field name="name">date from</field>
+                <field name="expression_label">assets_date_from</field>
+                <field name="figure_type">monetary</field>
+                <field name="blank_if_zero" eval="True"/>
+                <field name="sequence">5</field>
+            </record>
+            <record id="dep_schedule_asset_add" model="account.report.column">
+                <field name="name">+</field>
+                <field name="expression_label">assets_plus</field>
+                <field name="figure_type">monetary</field>
+                <field name="blank_if_zero" eval="True"/>
+                <field name="sequence">6</field>
+            </record>
+            <record id="dep_schedule_asset_minus" model="account.report.column">
+                <field name="name">-</field>
+                <field name="expression_label">assets_minus</field>
+                <field name="figure_type">monetary</field>
+                <field name="blank_if_zero" eval="True"/>
+                <field name="sequence">7</field>
+            </record>
+            <record id="dep_schedule_asset_closing" model="account.report.column">
+                <field name="name">date to</field>
+                <field name="expression_label">assets_date_to</field>
+                <field name="figure_type">monetary</field>
+                <field name="blank_if_zero" eval="False"/>
+                <field name="sequence">8</field>
+            </record>
+
+            <!-- 3. Depreciation -->
+            <record id="dep_schedule_dep_opening" model="account.report.column">
+                <field name="name">date from</field>
+                <field name="expression_label">depre_date_from</field>
+                <field name="figure_type">monetary</field>
+                <field name="blank_if_zero" eval="True"/>
+                <field name="sequence">9</field>
+            </record>
+            <record id="dep_schedule_dep_add" model="account.report.column">
+                <field name="name">+</field>
+                <field name="expression_label">depre_plus</field>
+                <field name="figure_type">monetary</field>
+                <field name="blank_if_zero" eval="True"/>
+                <field name="sequence">10</field>
+            </record>
+            <record id="dep_schedule_dep_minus" model="account.report.column">
+                <field name="name">-</field>
+                <field name="expression_label">depre_minus</field>
+                <field name="figure_type">monetary</field>
+                <field name="blank_if_zero" eval="True"/>
+                <field name="sequence">11</field>
+            </record>
+            <record id="dep_schedule_dep_closing" model="account.report.column">
+                <field name="name">date to</field>
+                <field name="expression_label">depre_date_to</field>
+                <field name="figure_type">monetary</field>
+                <field name="blank_if_zero" eval="False"/>
+                <field name="sequence">12</field>
+            </record>
+
+            <!-- 4. Book Value -->
+            <record id="dep_schedule_book_value" model="account.report.column">
+                <field name="name">book_value</field>
+                <field name="expression_label">balance</field>
+                <field name="figure_type">monetary</field>
+                <field name="blank_if_zero" eval="False"/>
+                <field name="sequence">13</field>
+            </record>
+        </field>
+    </record>
+</odoo>
