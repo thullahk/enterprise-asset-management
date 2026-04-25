@@ -1,25 +1,25 @@
 {
-    'name': 'Enterprise Asset Management Pro (Advanced Depreciation)',
+    'name': 'Advanced Asset Management & Depreciation (Accounting Kit Compatible)',
     'version': '16.0.1.0.0',
     'category': 'Accounting/Accounting',
     'sequence': 1,
-    'summary': 'Professional Enterprise-grade asset lifecycle & depreciation suite. Requires Odoo Enterprise Accounting.',
+    'summary': 'Professional asset lifecycle & depreciation suite. Compatible with Odoo 16 Full Accounting Kit.',
     'description': """
-# Enterprise Asset Management Pro
+# Advanced Asset Management & Lifecycle Suite
 
-Elevate your Odoo 16 Enterprise Accounting with a professional-grade asset management engine. This module seamlessly integrates with the Odoo Enterprise Reporting framework to provide a state-of-the-art financial experience.
+Professional-grade asset management engine for Odoo 16. This module is specifically designed to work seamlessly with the **Odoo 16 Full Accounting Kit**, bringing Enterprise-level asset tracking to your Community environment.
 
 ### ⚠️ Prerequisite:
-This module is an **Enterprise Enhancement**. It requires the **Odoo Enterprise Accounting** (account_reports) module to be installed to provide its advanced interactive reporting features.
+This module requires the **Odoo 16 Full Accounting Kit** (or any module providing the account_reports framework) to be installed to enable its advanced interactive reporting features.
 
 ### Key Professional Features:
 *   **Advanced Depreciation Engine**: Support for complex linear and declining balance methods with high financial precision.
-*   **Native Enterprise Reporting**: Leverages the account_reports engine for a premium, interactive Depreciation Schedule.
+*   **Interactive Reporting**: Uses the reporting framework for a premium, drill-down Depreciation Schedule.
 *   **Full Asset Governance**: Manage the entire lifecycle from acquisition and modifications to final disposal.
 *   **Accounting Integrity**: Deeply linked with Journal Entries and Vendor Bills for automated ledger impact.
 *   **Audit-Ready**: Transparent tracking of every book value change and depreciation move.
 
-Designed for organizations that demand Enterprise-level financial accuracy and modern reporting interfaces.
+The perfect companion for Odoo 16 users looking for a robust, high-performance asset management solution.
     """,
     'author': 'Rahmathullah/Digitz Technologies',
     'website': 'https://digitztech.com/',
