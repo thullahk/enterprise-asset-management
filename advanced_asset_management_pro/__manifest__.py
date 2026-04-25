@@ -27,7 +27,6 @@ The perfect companion for Odoo 16 users looking for a robust, high-performance a
     'depends': [
         'account',
         'mail',
-        'account_reports',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -41,9 +40,11 @@ The perfect companion for Odoo 16 users looking for a robust, high-performance a
         'report/depreciation_schedule_report.xml',
     ],
     'images': [
-        'static/description/banner.png',
-        'static/description/reporting.png',
-        'static/description/lifecycle.png',
+        'static/description/asset_form_draft.png',
+        'static/description/asset_form_running.png',
+        'static/description/asset_board.png',
+        'static/description/asset_bills.png',
+        'static/description/modify_wizard.png',
     ],
     'installable': True,
     'application': True,
