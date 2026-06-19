@@ -1,5 +1,5 @@
 {
-    'name': 'Advanced Asset Management & Depreciation (Accounting Kit Compatible)',
+    'name': 'Advanced Asset Management & Depreciation',
     'version': '16.0.1.0.0',
     'category': 'Accounting/Accounting',
     'sequence': 1,
@@ -10,7 +10,7 @@
 Professional-grade asset management engine for Odoo 16. This module is specifically designed to work seamlessly with the **Odoo 16 Full Accounting Kit**, bringing Enterprise-level asset tracking to your Community environment.
 
 ### ⚠️ Prerequisite:
-This module requires the **Odoo 16 Full Accounting Kit** (or any module providing the account_reports framework) to be installed to enable its advanced interactive reporting features.
+This module requires the **Odoo 16 Basic Accounting Kit** (or any module providing the account_reports framework) to be installed to enable its advanced interactive reporting features.
 
 ### Key Professional Features:
 *   **Advanced Depreciation Engine**: Support for complex linear and declining balance methods with high financial precision.
@@ -49,6 +49,6 @@ The perfect companion for Odoo 16 users looking for a robust, high-performance a
     'installable': True,
     'application': True,
     'auto_install': False,
-    'price': 9.00,
+    'price': 0.00,
     'currency': 'EUR',
 }
