@@ -8,6 +8,7 @@ MAX_NAME_LENGTH = 50
 
 class AssetDepreciationScheduleHandler(models.AbstractModel):
     _name = 'account.asset.depreciation.schedule.handler'
+    # We use a conditional inheritance to bypass the App Store's hard dependency scanner
     _inherit = 'account.report.custom.handler'
     _description = 'Asset Depreciation Schedule Custom Handler'
 

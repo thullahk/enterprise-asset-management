@@ -1,179 +1,302 @@
-<style>
-    :root {
-        --primary: #00b894;
-        --secondary: #55efc4;
-        --warning: #fab1a0;
-        --dark: #2d3436;
-        --text: #636e72;
-        --glass: rgba(255, 255, 255, 0.9);
-    }
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body style="font-family: 'Outfit', sans-serif; margin: 0; padding: 0; color: #2d3436; background-color: #ffffff;">
 
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+    <style>
+        :root {
+            --primary: #00b894;
+            --primary-dark: #009174;
+            --accent: #55efc4;
+            --dark: #0f172a;
+            --text-light: #64748b;
+            --glass: rgba(255, 255, 255, 0.95);
+        }
 
-    .animate-up { animation: fadeInUp 0.8s ease-out forwards; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .hero-section {
-        background: linear-gradient(135deg, #2d3436 0%, #000 100%);
-        color: white;
-        padding: 100px 20px;
-        text-align: center;
-        border-radius: 0 0 80px 80px;
-        position: relative;
-        overflow: hidden;
-    }
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(0, 184, 148, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(0, 184, 148, 0.4); }
+            100% { box-shadow: 0 0 5px rgba(0, 184, 148, 0.2); }
+        }
 
-    .hero-section::before {
-        content: 'ACCOUNTING KIT';
-        position: absolute;
-        top: 20px;
-        right: -50px;
-        background: var(--primary);
-        padding: 10px 100px;
-        transform: rotate(45deg);
-        font-weight: 900;
-        letter-spacing: 2px;
-        font-size: 14px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
+        .animate-up { animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            border-radius: 0 0 100px 100px;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .feature-card {
-        background: var(--glass);
-        backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        border-radius: 24px;
-        padding: 40px;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-        height: 100%;
-    }
+        .feature-card {
+            background: white;
+            border-radius: 32px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            border: 1px solid #f1f5f9;
+            height: 100%;
+        }
 
-    .feature-card:hover {
-        transform: translateY(-15px);
-        box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-        border-color: var(--primary);
-    }
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+        }
 
-    .req-badge {
-        background: rgba(0, 184, 148, 0.1);
-        color: var(--primary);
-        border: 1px solid var(--primary);
-        padding: 8px 20px;
-        border-radius: 50px;
-        font-size: 14px;
-        font-weight: 700;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 30px;
-    }
+        .premium-img {
+            border-radius: 24px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.1);
+            max-width: 100%;
+            transition: transform 0.5s ease;
+        }
 
-    .section-title {
-        color: var(--dark);
-        font-weight: 900;
-        font-size: 36px;
-        margin-bottom: 50px;
-        text-align: center;
-    }
+        .premium-img:hover {
+            transform: scale(1.02);
+        }
 
-    .img-premium {
-        border-radius: 30px;
-        box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-        border: 1px solid rgba(255,255,255,0.1);
-        max-width: 100%;
-    }
-</style>
+        .badge-pro {
+            background: rgba(0, 184, 148, 0.1);
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-size: 15px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="oe_container">
-        <div class="req-badge animate-up">
-            <i class="fa fa-check-circle"></i> Odoo 16 Full Accounting Kit Compatible
-        </div>
-        <h1 class="animate-up" style="font-weight: 900; font-size: 54px; margin-bottom: 25px; background: linear-gradient(to right, #fff, #55efc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-            Advanced Asset Management
-        </h1>
-        <p class="animate-up" style="font-size: 24px; opacity: 0.8; max-width: 850px; margin: 0 auto 50px; line-height: 1.5;">
-            Bring Enterprise-grade asset tracking and automated depreciation to your Odoo Community environment.
-        </p>
-        <div class="animate-up" style="margin-top: 60px;">
-            <img src="banner.png" class="img-premium" alt="Accounting Kit Asset Management">
-        </div>
-    </div>
-</section>
+        .section-header {
+            max-width: 800px;
+            margin: 0 auto 80px;
+            text-align: center;
+        }
 
-<!-- Core Features -->
-<section class="oe_container" style="padding: 120px 20px;">
-    <h2 class="section-title">Professional Assets for Community</h2>
-    <div class="oe_row oe_spaced">
-        <div class="oe_span4 animate-up">
-            <div class="feature-card">
-                <div style="font-size: 40px; color: var(--primary); margin-bottom: 25px;"><i class="fa fa-calculator"></i></div>
-                <h4 style="font-weight: 800; color: var(--dark);">Smart Depreciation</h4>
-                <p style="color: var(--text); line-height: 1.7;">Advanced engines for Linear and Declining Balance methods with automated journal entry generation.</p>
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0, 184, 148, 0.3);
+        }
+
+        .compatibility-card {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            border: 2px dashed #e2e8f0;
+        }
+    </style>
+
+    <!-- Hero -->
+    <section class="hero-section">
+        <div class="oe_container">
+            <div class="badge-pro animate-up">
+                <i class="fa fa-diamond"></i> Professional Edition
+            </div>
+            <h1 class="animate-up" style="font-weight: 800; font-size: 64px; margin-bottom: 30px; letter-spacing: -2px; line-height: 1.1;">
+                Advanced Asset <span style="color: var(--primary);">Management</span>
+            </h1>
+            <p class="animate-up" style="font-size: 24px; opacity: 0.9; max-width: 800px; margin: 0 auto 60px; font-weight: 300; line-height: 1.6;">
+                The most sophisticated asset lifecycle and depreciation suite for Odoo 16. Professional governance, automated accounting, and interactive reporting.
+            </p>
+            <div class="animate-up" style="margin-top: 40px; position: relative; z-index: 2;">
+                <img src="banner.png" class="premium-img" style="width: 1000px;" alt="Asset Management Hero">
             </div>
         </div>
-        <div class="oe_span4 animate-up" style="animation-delay: 0.1s;">
-            <div class="feature-card">
-                <div style="font-size: 40px; color: var(--primary); margin-bottom: 25px;"><i class="fa fa-bar-chart"></i></div>
-                <h4 style="font-weight: 800; color: var(--dark);">Interactive Schedule</h4>
-                <p style="color: var(--text); line-height: 1.7;">High-end reporting framework integration providing a dynamic view of your entire asset portfolio.</p>
-            </div>
-        </div>
-        <div class="oe_span4 animate-up" style="animation-delay: 0.2s;">
-            <div class="feature-card">
-                <div style="font-size: 40px; color: var(--primary); margin-bottom: 25px;"><i class="fa fa-exchange"></i></div>
-                <h4 style="font-weight: 800; color: var(--dark);">Lifecycle Governance</h4>
-                <p style="color: var(--text); line-height: 1.7;">Complete management of asset procurement, modifications, sales, and professional disposals.</p>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
-<!-- Integration Showcase -->
-<section style="background: #fdfdfd; padding: 120px 0;">
-    <div class="oe_container">
-        <div class="oe_row oe_spaced" style="display: flex; align-items: center; flex-wrap: wrap;">
-            <div class="oe_span6 animate-up">
-                <div class="req-badge" style="background: rgba(0, 184, 148, 0.05); color: var(--primary); border-color: var(--primary);">
-                    Full Integration
-                </div>
-                <h2 style="font-weight: 900; color: var(--dark); font-size: 42px; margin-bottom: 30px;">Premium Financial Transparency</h2>
-                <p style="font-size: 19px; color: var(--text); line-height: 1.8; margin-bottom: 40px;">
-                    Designed to work natively with the Odoo 16 Full Accounting Kit. Drill down into asset origins, analyze book values, and manage complex modifications with ease.
-                </p>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div style="font-weight: 700; color: var(--dark);"><i class="fa fa-check" style="color: var(--primary);"></i> Accounting Kit Ready</div>
-                    <div style="font-weight: 700; color: var(--dark);"><i class="fa fa-check" style="color: var(--primary);"></i> Vendor Bill Link</div>
-                    <div style="font-weight: 700; color: var(--dark);"><i class="fa fa-check" style="color: var(--primary);"></i> Excel/PDF Export</div>
-                    <div style="font-weight: 700; color: var(--dark);"><i class="fa fa-check" style="color: var(--primary);"></i> Grouping & Filters</div>
+    <!-- Core Value Props -->
+    <section class="oe_container" style="padding: 140px 20px;">
+        <div class="section-header animate-up">
+            <h2 style="font-size: 48px; font-weight: 800; color: var(--dark); margin-bottom: 20px;">Enterprise Power, Community Freedom</h2>
+            <p style="font-size: 19px; color: var(--text-light);">Unlock advanced features previously reserved for Enterprise, now optimized for the Odoo 16 Accounting ecosystem.</p>
+        </div>
+        
+        <div class="oe_row oe_spaced" style="display: flex; gap: 30px;">
+            <div class="oe_span4">
+                <div class="feature-card animate-up">
+                    <div class="step-number">01</div>
+                    <h3 style="font-weight: 700; font-size: 22px; margin-bottom: 15px;">Automated Lifecycle</h3>
+                    <p style="color: var(--text-light); line-height: 1.7;">Seamlessly transition from Draft to Running. Automatic board generation ensures your financial books are always accurate.</p>
                 </div>
             </div>
-            <div class="oe_span6 animate-up" style="text-align: right;">
-                <img src="reporting.png" class="img-premium" alt="Reporting Dashboard">
+            <div class="oe_span4">
+                <div class="feature-card animate-up" style="animation-delay: 0.1s;">
+                    <div class="step-number">02</div>
+                    <h3 style="font-weight: 700; font-size: 22px; margin-bottom: 15px;">Smart Adjustments</h3>
+                    <p style="color: var(--text-light); line-height: 1.7;">Handle disposals, sales, and modifications with a professional wizard that manages all accounting impacts automatically.</p>
+                </div>
+            </div>
+            <div class="oe_span4">
+                <div class="feature-card animate-up" style="animation-delay: 0.2s;">
+                    <div class="step-number">03</div>
+                    <h3 style="font-weight: 700; font-size: 22px; margin-bottom: 15px;">Interactive Insights</h3>
+                    <p style="color: var(--text-light); line-height: 1.7;">A drill-down depreciation schedule that brings financial transparency to your fingertips with one-click navigation.</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Call to Action -->
-<section style="background: var(--dark); color: white; padding: 100px 20px; text-align: center;">
-    <div class="oe_container">
-        <h2 style="font-weight: 900; font-size: 42px; margin-bottom: 25px;">The Perfect Asset Solution for Community</h2>
-        <p style="font-size: 20px; opacity: 0.8; max-width: 750px; margin: 0 auto 50px;">
-            Professional assets don't have to be Enterprise. Bring the most advanced management engine to your Odoo 16 instance today.
-        </p>
-        <div style="background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); display: inline-block;">
-            <p style="margin: 0; opacity: 0.7; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">Compatibility</p>
-            <h3 style="margin-top: 10px; font-weight: 700;">Works with Odoo 16 Community + Accounting Kit</h3>
+    <!-- Detailed Showcase 1: Creation -->
+    <section style="background: #f8fafc; padding: 120px 0;">
+        <div class="oe_container">
+            <div class="oe_row oe_spaced" style="display: flex; align-items: center; flex-wrap: wrap;">
+                <div class="oe_span6">
+                    <div style="padding-right: 50px;">
+                        <h4 style="color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; margin-bottom: 20px;">Precision Control</h4>
+                        <h2 style="font-size: 42px; font-weight: 800; color: var(--dark); margin-bottom: 30px; line-height: 1.2;">Sophisticated Asset <br/>Configuration</h2>
+                        <p style="font-size: 18px; color: var(--text-light); line-height: 1.8; margin-bottom: 35px;">
+                            Configure assets with surgical precision. Support for Linear, Declining, and Prorata computations allows you to match any corporate accounting policy perfectly.
+                        </p>
+                        <ul style="list-style: none; padding: 0; margin-bottom: 40px;">
+                            <li style="margin-bottom: 15px; font-weight: 600; display: flex; align-items: center; gap: 12px;">
+                                <i class="fa fa-check-circle" style="color: var(--primary); font-size: 20px;"></i> Advanced Prorata Date Management
+                            </li>
+                            <li style="margin-bottom: 15px; font-weight: 600; display: flex; align-items: center; gap: 12px;">
+                                <i class="fa fa-check-circle" style="color: var(--primary); font-size: 20px;"></i> Flexible Salvage Value Support
+                            </li>
+                            <li style="margin-bottom: 15px; font-weight: 600; display: flex; align-items: center; gap: 12px;">
+                                <i class="fa fa-check-circle" style="color: var(--primary); font-size: 20px;"></i> Deep GL Account Integration
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oe_span6">
+                    <img src="asset_form_draft.png" class="premium-img" alt="Draft Asset Form">
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Footer -->
-<section class="oe_container" style="padding: 60px 20px; text-align: center; border-top: 1px solid #eee;">
-    <p style="color: #b2bec3; font-size: 14px;">Version 16.0.1.0.0 | Built for the Odoo Community Accounting Ecosystem</p>
-    <p style="color: #b2bec3; font-size: 12px; margin-top: 10px;">&copy; Rahmathullah/Digitz Technologies</p>
-</section>
+    <!-- Detailed Showcase 2: Board & Status -->
+    <section style="padding: 120px 0;">
+        <div class="oe_container">
+            <div class="oe_row oe_spaced" style="display: flex; align-items: center; flex-wrap: wrap; flex-direction: row-reverse;">
+                <div class="oe_span6">
+                    <div style="padding-left: 50px;">
+                        <h4 style="color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; margin-bottom: 20px;">Live Tracking</h4>
+                        <h2 style="font-size: 42px; font-weight: 800; color: var(--dark); margin-bottom: 30px; line-height: 1.2;">Dynamic Depreciation <br/>Board</h2>
+                        <p style="font-size: 18px; color: var(--text-light); line-height: 1.8; margin-bottom: 35px;">
+                            Watch your asset's value evolve over time. The integrated depreciation board provides a clear timeline of posted and scheduled entries with real-time book value updates.
+                        </p>
+                        <div style="background: white; border-radius: 20px; padding: 25px; border-left: 5px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                            <p style="margin: 0; font-weight: 600; color: var(--dark); font-size: 16px;">
+                                "Confirming an asset immediately schedules its entire depreciation journey, linked directly to your General Ledger."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_span6">
+                    <img src="asset_board.png" class="premium-img" alt="Depreciation Board">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Grid -->
+    <section style="background: var(--dark); padding: 120px 0; color: white;">
+        <div class="oe_container">
+            <div class="section-header animate-up">
+                <h2 style="font-size: 48px; font-weight: 800; color: white; margin-bottom: 25px;">Professional Toolkit</h2>
+                <p style="opacity: 0.7; font-size: 20px;">Every tool you need to manage your corporate assets with confidence.</p>
+            </div>
+            
+            <div class="oe_row oe_spaced" style="display: flex; flex-wrap: wrap; gap: 30px;">
+                <!-- Bills Integration -->
+                <div class="oe_span6">
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 32px; overflow: hidden;">
+                        <img src="asset_bills.png" style="width: 100%;" alt="Bill Integration">
+                        <div style="padding: 30px;">
+                            <h4 style="font-weight: 700; font-size: 20px; margin-bottom: 10px;">Native Billing Link</h4>
+                            <p style="opacity: 0.6; line-height: 1.6;">Trace every asset back to its source vendor bill for perfect audit trails and procurement analysis.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modify Wizard -->
+                <div class="oe_span6">
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 32px; overflow: hidden;">
+                        <img src="modify_wizard.png" style="width: 100%;" alt="Modify Asset">
+                        <div style="padding: 30px;">
+                            <h4 style="font-weight: 700; font-size: 20px; margin-bottom: 10px;">Lifecycle Management</h4>
+                            <p style="opacity: 0.6; line-height: 1.6;">Professional disposal, sale, re-evaluation, and pausing capabilities handled via a clean, intuitive interface.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compatibility -->
+    <section style="padding: 120px 0;">
+        <div class="oe_container">
+            <div class="section-header animate-up">
+                <h2 style="font-size: 36px; font-weight: 800; color: var(--dark); margin-bottom: 25px;">Compatibility & Prerequisites</h2>
+            </div>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="compatibility-card animate-up">
+                    <div style="font-size: 50px; color: var(--primary);"><i class="fa fa-info-circle"></i></div>
+                    <div>
+                        <h4 style="font-weight: 800; margin: 0 0 10px 0; font-size: 22px;">Odoo 16 Community Optimized</h4>
+                        <p style="margin: 0; color: var(--text-light); line-height: 1.6; font-size: 17px;">
+                            This module is designed to work seamlessly with the <strong>Odoo 16 Full Accounting Kit</strong> (or any module providing the <code>account_reports</code> framework). It brings enterprise-level interactive reporting to your Community environment without the Enterprise license requirement.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 100px 0; text-align: center; color: white;">
+        <div class="oe_container animate-up">
+            <h2 style="font-size: 42px; font-weight: 800; margin-bottom: 25px;">Ready to Elevate Your Assets?</h2>
+            <p style="font-size: 22px; opacity: 0.9; max-width: 700px; margin: 0 auto 45px;">
+                Experience the most advanced asset management engine for Odoo 16. Professional, reliable, and perfectly integrated.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <div style="background: white; color: var(--primary); padding: 18px 45px; border-radius: 100px; font-weight: 800; font-size: 18px;">
+                    Odoo 16 Community Ready
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: 60px 0; text-align: center; border-top: 1px solid #f1f5f9;">
+        <div class="oe_container">
+            <img src="https://digitztech.com/logo.png" style="height: 30px; margin-bottom: 25px; opacity: 0.5;" alt="Digitz Technologies">
+            <p style="color: var(--text-light); font-size: 14px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600;">
+                Version 16.0.1.0.0 | &copy; Rahmathullah / Digitz Technologies
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
